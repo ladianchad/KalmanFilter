@@ -44,11 +44,11 @@ class ExtendedKalman(object):
 		self.start = False
 
 	def calculate(self,z):
-		self.A = self.A_function(z)
-		self.H = self.H_function(z)
 		if self.start == False:
 			self.x = self.H.T@z
 			self.start = True
+		self.A = self.A_function(x)
+		self.H = self.H_function(x)
 		xp = self.A@self.x
 		Pp = self.A@self.P@self.A.T + self.Q
 		K = Pp@self.H.T@np.linalg.inv(self.H@Pp@self.H.T + self.R)
